@@ -1,6 +1,6 @@
 # ynanb - You Need a Nordea Budget
 
-This is a simple Python 3 script to make personal accounting a little easier.
+This is a simple Python 3 script to convert exported Nordea transactions to [YNAB CSV format](http://classic.youneedabudget.com/support/article/csv-file-importing).
 
 Perhaps it will be useful to other clients of Nordea bank.
 
