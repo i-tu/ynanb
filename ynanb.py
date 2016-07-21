@@ -1,8 +1,13 @@
-# ynanb (You need a Nordea Budget) by Ian Tuomi (iant@iki.fi), MIT Licence
+#!/usr/bin/env python3
+
+# ynanb (You Need a Nordea Budget) by Ian Tuomi (iant@iki.fi), MIT Licence
 
 import csv
 import datetime
 import itertools
+import sys
+
+YNAB_FIELDS = ['Date', 'Payee', 'Category', 'Memo', 'Outflow', 'Inflow']
 
 def convert_date(nordea_date):
     return { 'Date': nordea_date.replace('.', '/') }
@@ -29,23 +34,25 @@ converters = {
     'Viesti': convert_message
 }
 
-in_file_name = 'nordea_example.txt'
-ynab_fields = ['Date', 'Payee', 'Category', 'Memo', 'Outflow', 'Inflow']
-output = []
+def main(in_file_name = 'nordea.txt'):
+    output = []
 
-with open(in_file_name) as in_file:
-    # Skip first two lines, and every other line afterwards
-    sliced_file = itertools.islice(in_file, 2, None, 2)
-    reader = csv.DictReader(sliced_file, delimiter='\t')
-    for input_row in reader:
-        output_row = {}
-        for key, value in input_row.items():
-            if key in converters:
-                output_row.update(converters[key](value))
-        output.append(output_row)
+    with open(in_file_name) as in_file:
+        # Skip first two lines, and every other line afterwards
+        sliced_file = itertools.islice(in_file, 2, None, 2)
+        reader = csv.DictReader(sliced_file, delimiter='\t')
+        for input_row in reader:
+            output_row = {}
+            for key, value in input_row.items():
+                if key in converters:
+                    output_row.update(converters[key](value))
+            output.append(output_row)
 
-with open('ynab_{}'.format(in_file_name), 'w') as out_file:
-    writer = csv.DictWriter(out_file, fieldnames=ynab_fields)
-    writer.writeheader()
-    for row in output:
-        writer.writerow(row)
+    with open('ynab_{}'.format(in_file_name), 'w') as out_file:
+        writer = csv.DictWriter(out_file, fieldnames=YNAB_FIELDS)
+        writer.writeheader()
+        for row in output:
+            writer.writerow(row)
+
+if __name__ == '__main__':
+    main() if len(sys.argv) < 2 else main(sys.argv[1])
