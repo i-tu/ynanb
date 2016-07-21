@@ -4,29 +4,29 @@ import csv
 import datetime
 import itertools
 
-def convertDate(nordea_date):
+def convert_date(nordea_date):
     return { 'Date': nordea_date.replace('.', '/') }
 
-def convertFlow(amount_string):
-    # e.g. -7,40
-    # n.b. This can result in rounding errors
+def convert_flow(amount_string):
+    # Input e.g. -7,40
+    # n.b. Using round on float may result in rounding errors
     amount = round(float(amount_string.replace(',', '.')), 2)
     if amount > 0:
         return { 'Inflow': amount }
     else:
         return { 'Outflow': -amount }
 
-def convertMessage(msg):
+def convert_message(msg):
     return { 'Memo': msg }
 
-def convertPayee(payee):
+def convert_payee(payee):
     return { 'Payee': payee }
 
 converters = {
-    'Kirjauspäivä': convertDate,
-    'Määrä': convertFlow,
-    'Saaja/Maksaja': convertPayee,
-    'Viesti': convertMessage
+    'Kirjauspäivä': convert_date,
+    'Määrä': convert_flow,
+    'Saaja/Maksaja': convert_payee,
+    'Viesti': convert_message
 }
 
 in_file_name = 'nordea_example.txt'
