@@ -1,0 +1,3 @@
+Date,Payee,Category,Memo,Outflow,Inflow
+25/01/2012,Sample Payee,,VIESTI ,100.0,
+26/01/2012,Sample Payee 2,,VIESTI ,,500.0

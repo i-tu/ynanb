@@ -1,0 +1,7 @@
+Tilinumero	FIxxxxxxxxxxxxxxxxx
+
+Kirjauspäivä	Arvopäivä	Maksupäivä	Määrä	Saaja/Maksaja	Tilinumero	BIC	Tapahtuma	Viite	Maksajan viite	Viesti	Kortinnumero	Kuitti
+
+25.01.2012	25.01.2012	25.01.2012	-100,00	Sample Payee			Visa Electron-osto	01234567890X		VIESTI 	0123456789ABCDEF
+
+26.01.2012	26.01.2012	26.01.2012	500,00	Sample Payee 2			Visa Electron-osto	01234567890X		VIESTI 	0123456789ABCDEF
